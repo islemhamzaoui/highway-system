@@ -1,0 +1,158 @@
+[
+{
+  "model": "autouroute_api.accident",
+  "pk": 1,
+  "fields": {
+    "highway_name": "Unknown",
+    "latitude": 34.06,
+    "longitude": -118.23,
+    "description": "Updated accident test 2",
+    "timestamp": "2025-01-09T14:01:36.832Z",
+    "last_modified": "2025-01-09T18:37:04.280Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 2,
+  "fields": {
+    "highway_name": "Unknown",
+    "latitude": 34.0522,
+    "longitude": -118.2437,
+    "description": "Test 1.",
+    "timestamp": "2025-01-09T14:32:50.822Z",
+    "last_modified": "2025-01-09T14:32:50.829Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 3,
+  "fields": {
+    "highway_name": "Unknown",
+    "latitude": 126.0,
+    "longitude": 559.0,
+    "description": "cehcehc",
+    "timestamp": "2025-01-09T20:01:05.953Z",
+    "last_modified": "2025-01-09T20:01:05.953Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 4,
+  "fields": {
+    "highway_name": "Unknown",
+    "latitude": 5868.0,
+    "longitude": 2339.0,
+    "description": "ehduadh",
+    "timestamp": "2025-01-13T15:25:24.702Z",
+    "last_modified": "2025-01-13T15:25:24.702Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 5,
+  "fields": {
+    "highway_name": "Unknown",
+    "latitude": 568.0,
+    "longitude": 597.0,
+    "description": "ecec",
+    "timestamp": "2025-01-13T16:05:43.440Z",
+    "last_modified": "2025-01-13T16:05:43.440Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 6,
+  "fields": {
+    "highway_name": "Unknown",
+    "latitude": 598.0,
+    "longitude": 47.0,
+    "description": "lokip",
+    "timestamp": "2025-01-13T23:16:50.534Z",
+    "last_modified": "2025-01-13T23:16:50.534Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 8,
+  "fields": {
+    "highway_name": "Sfax-Sousse",
+    "latitude": 26598.0,
+    "longitude": 2356.0,
+    "description": "jpoij",
+    "timestamp": "2025-01-17T22:48:48.336Z",
+    "last_modified": "2025-01-17T22:48:48.336Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 9,
+  "fields": {
+    "highway_name": "Sfax-Sousse",
+    "latitude": 222.0,
+    "longitude": 3333.0,
+    "description": "testest",
+    "timestamp": "2025-01-17T22:51:19.964Z",
+    "last_modified": "2025-01-17T22:51:19.964Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 10,
+  "fields": {
+    "highway_name": "Sfax-Sousse",
+    "latitude": 598.0,
+    "longitude": 569.0,
+    "description": "tes1test1",
+    "timestamp": "2025-01-17T22:53:14.153Z",
+    "last_modified": "2025-01-17T22:53:14.153Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 11,
+  "fields": {
+    "highway_name": "Highway A2",
+    "latitude": 36.8066,
+    "longitude": 10.1816,
+    "description": "Another accident",
+    "timestamp": "2025-01-17T23:11:26.589Z",
+    "last_modified": "2025-01-17T23:11:26.589Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 12,
+  "fields": {
+    "highway_name": "",
+    "latitude": 45.0,
+    "longitude": 2.0,
+    "description": "jipji",
+    "timestamp": "2025-01-18T00:53:38.290Z",
+    "last_modified": "2025-01-18T00:53:38.290Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 13,
+  "fields": {
+    "highway_name": "",
+    "latitude": 34.05,
+    "longitude": -118.25,
+    "description": "Accident on Highway A1",
+    "timestamp": "2025-01-18T01:00:58.432Z",
+    "last_modified": "2025-01-18T01:00:58.432Z"
+  }
+},
+{
+  "model": "autouroute_api.accident",
+  "pk": 14,
+  "fields": {
+    "highway_name": "",
+    "latitude": 34.05,
+    "longitude": -118.25,
+    "description": "Accident on Highway A3.",
+    "timestamp": "2025-01-18T06:23:59.938Z",
+    "last_modified": "2025-01-18T06:23:59.938Z"
+  }
+}
+]

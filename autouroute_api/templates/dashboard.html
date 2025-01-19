@@ -1,0 +1,664 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Highway Management System</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb7g5/5hb7g5/5hb7g5/5hb7g5/5hb7g5/5hb7g5" crossorigin="anonymous">
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ["Public Sans:300,400,500,600,700"]
+            },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["{% static 'assets/css/fonts.min.css' %}"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="{% url 'dashboard_view' %}" class="logo">
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item active">
+                            <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="dashboard">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{% url 'dashboard_view' %}">
+                                            <span class="sub-item">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#maps">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Maps</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="maps">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{% url 'googlemaps' %}">
+                                            <span class="sub-item">Google Maps</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="{% url 'dashboard_view' %}" class="logo">
+                            <img src="{% static 'assets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand"
+                                class="navbar-brand" height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
+                </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                    aria-expanded="false" aria-haspopup="true">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-search animated fadeIn">
+                                    <form class="navbar-left navbar-form nav-search">
+                                        <div class="input-group">
+                                            <input type="text" placeholder="Search ..." class="form-control" />
+                                        </div>
+                                    </form>
+                                </ul>
+                            </li>
+                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                            </li>
+                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                            </li>
+                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                                <a class="nav-link" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                                    <i class="fas fa-layer-group"></i>
+                                </a>
+                                <div class="dropdown-menu quick-actions animated fadeIn">
+                                    <div class="quick-actions-header">
+                                        <span class="title mb-1">Quick Actions</span>
+                                        <span class="subtitle op-7">Shortcuts</span>
+                                    </div>
+                                    <div class="quick-actions-scroll scrollbar-outer">
+                                        <div class="quick-actions-items">
+                                            <div class="row m-0">
+                                                <a class="col-6 col-md-4 p-0" href="{% url 'googlemaps' %}">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-warning rounded-circle">
+                                                            <i class="fas fa-map"></i>
+                                                        </div>
+                                                        <span class="text">Maps</span>
+                                                    </div>
+                                                </a>
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-secondary rounded-circle">
+                                                            <i class="fas fa-credit-card"></i>
+                                                        </div>
+                                                        <span class="text">Payments</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
+                                    aria-expanded="false">
+                                    <div class="avatar-sm">
+                                        <img src="{% static 'assets/img/me_picture.jpg' %}" alt="..."
+                                            class="avatar-img rounded-circle" />
+                                    </div>
+                                    <span class="profile-username">
+                                        <span class="op-7">Islem</span>
+                                        <span class="fw-bold">Hamzaoui</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                    <div class="dropdown-user-scroll scrollbar-outer">
+                                        <li>
+                                            <div class="user-box">
+                                                <div class="avatar-lg">
+                                                    <img src="{% static 'assets/img/me_picture.jpg' %}" alt="image profile"
+                                                        class="avatar-img rounded" />
+                                                </div>
+                                                <div class="u-text">
+                                                    <h4>Islem</h4>
+                                                    <p class="text-muted">hello@example.com</p>
+                                                    <a href="{% static 'profile.html' %}"
+                                                        class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/login/">Logout</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+            <div id="popup">
+                <p id="popupMessage"></p>
+                <button id="closePopup">Close</button>
+            </div>
+            <div class="container">
+                <div class="page-inner">
+                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
+                        data-bs-target="#reportAccidentModal">
+                        Report Accident
+                    </button>
+
+                    <!-- Accident Table -->
+<div class="card-body p-0">
+    <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Highway</th>
+                    <th scope="col">Accident Type</th>
+                    <th scope="col">Severity</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Reported By</th>
+                    <th scope="col">Reported At</th>
+                    <th scope="col">Emergency Contact Called</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody id="accident-table-body">
+                {% for accident in accidents %}
+                    <tr>
+                        <!-- Highway -->
+                        <td>{{ accident.highway.name|default:"N/A" }}</td>
+            
+                        <!-- Accident Type -->
+                        <td>{{ accident.get_accident_type_display|default:"N/A" }}</td>
+            
+                        <!-- Severity -->
+                        <td>{{ accident.get_severity_display|default:"N/A" }}</td>
+            
+                        <!-- Description -->
+                        <td>{{ accident.description|default:"N/A" }}</td>
+            
+                        <!-- Reported By -->
+                        <td>
+                            {% if accident.reported_by %}
+                                {{ accident.reported_by.get_full_name|default:accident.reported_by.username }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+            
+                        <!-- Reported At -->
+                        <td>{{ accident.reported_at|default:"N/A" }}</td>
+            
+                        <!-- Emergency Contact Called -->
+                        <td>
+                            {% if accident.emergency_contact_called %}
+                                <span class="badge bg-success">Yes</span>
+                            {% else %}
+                                <span class="badge bg-danger">No</span>
+                            {% endif %}
+                        </td>
+            
+                        <!-- Status -->
+                        <td>
+                            <span class="badge 
+                                {% if accident.status == 'reported' %}bg-warning
+                                {% elif accident.status == 'under_investigation' %}bg-info
+                                {% elif accident.status == 'resolved' %}bg-success
+                                {% else %}bg-secondary
+                                {% endif %}">
+                                {{ accident.get_status_display|default:"N/A" }}
+                            </span>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">No accidents found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+                    <!-- Report Accident Modal -->
+                    <div class="modal fade" id="reportAccidentModal" tabindex="-1"
+                        aria-labelledby="reportAccidentModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="reportAccidentModalLabel">Report an Accident</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="accident-form">
+                                        {% csrf_token %} 
+                                        <!-- Highway Selection -->
+                                        <div class="mb-3">
+                                            <label for="highway" class="form-label">Highway</label>
+                                            <select class="form-control" id="highway" name="highway" required>
+                                                <option value="" disabled selected>Select a highway</option>
+                                                {% for highway in highways %}
+                                                    <option value="{{ highway.id }}">{{ highway.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <!-- Accident Type -->
+                                        <div class="mb-3">
+                                            <label for="accident_type" class="form-label">Accident Type</label>
+                                            <select class="form-control" id="accident_type" name="accident_type" required>
+                                                <option value="" disabled selected>Select accident type</option>
+                                                <option value="collision">Collision</option>
+                                                <option value="rollover">Rollover</option>
+                                                <option value="pedestrian">Pedestrian Accident</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Severity -->
+                                        <div class="mb-3">
+                                            <label for="severity" class="form-label">Severity</label>
+                                            <select class="form-control" id="severity" name="severity" required>
+                                                <option value="" disabled selected>Select severity</option>
+                                                <option value="minor">Minor</option>
+                                                <option value="major">Major</option>
+                                                <option value="fatal">Fatal</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Description -->
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label">Description</label>
+                                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                                        </div>
+
+                                        <!-- Emergency Contact Called -->
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="emergency_contact_called" name="emergency_contact_called">
+                                            <label class="form-check-label" for="emergency_contact_called">Emergency Contact Called</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="reportAccident()">Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highway Status Information -->
+                    <h1>Highway Status Information</h1>
+
+                    <!-- Search and Filters Section -->
+                    <div class="row mb-4">
+                        <!-- Search Bar -->
+                        <div class="col-md-6">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search highways by name..." />
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="col-md-3">
+                            <select id="statusFilter" class="form-control">
+                                <option value="">Filter by Status</option>
+                                <option value="open">Open</option>
+                                <option value="under_construction">Under Construction</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="col-md-3">
+                            <select id="tagFilter" class="form-control">
+                                <option value="">Filter by Tags</option>
+                                <option value="has_tolls">Has Tolls</option>
+                                <option value="has_rest_areas">Has Rest Areas</option>
+                                <option value="has_emergency_contacts">Has Emergency Contacts</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Display Highways -->
+                    <table class="table table-bordered" id="highway-table">
+                        <thead>
+                            <tr>
+                                <th>Highway Name</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for highway in highways %}
+                            <tr data-highway-id="{{ highway.id }}">
+                                <td>{{ highway.name }}</td>
+                                <td>{{ highway.latest_status }}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#tollsModal{{ highway.id }}">
+                                        View Tolls
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tolls Modal for Each Highway -->
+    {% for highway in highways %}
+    <div class="modal fade" id="tollsModal{{ highway.id }}" tabindex="-1" aria-labelledby="tollsModalLabel{{ highway.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tollsModalLabel{{ highway.id }}">Tolls for {{ highway.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Vehicle Category</th>
+                                <th>Rate</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for toll in tolls %}
+                                {% if toll.highway.id == highway.id %}
+                                    <tr>
+                                        <td>{{ toll.location }}</td>
+                                        <td>{{ toll.vehicle_category }}</td>
+                                        <td>${{ toll.rate }}</td>
+                                        <td>
+                                            {% if toll.paid %}
+                                                <span class="text-success">Paid</span>
+                                            {% else %}
+                                                <button class="btn btn-success btn-sm" onclick="openPaymentModal('{{ toll.id }}', '{{ toll.rate }}')">
+                                                    Pay Now
+                                                </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- JavaScript for Stripe Payment -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    function openPaymentModal(tollId, amount) {
+        fetch('/create-checkout-session/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify({
+                amount: amount * 100,  // Convert to cents
+                currency: 'usd',
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            const sessionId = data.sessionId;
+            // Redirect to Stripe Checkout
+            const stripe = Stripe('pk_test_51QiYbvBXMMkPWU9DyR5zfOeJ1W83GBInB05JRheYinz842Bz95ZpyVExHKkLrtkUMqKKp38JD2d4wz5tZoPEHFtH00tL7ptyMo');
+            stripe.redirectToCheckout({ sessionId: sessionId });
+        });
+    }
+</script>
+
+
+    <!-- JavaScript for Form Submission and Filtering -->
+    <script>
+        // Function to handle accident report submission
+        function reportAccident() {
+            const formData = new FormData(document.getElementById('accident-form'));
+        
+            // Log form data for debugging
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+        
+            fetch('/api/accidents/', {  // Ensure this matches your Django URL pattern
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Accident reported successfully!');
+                    $('#reportAccidentModal').modal('hide'); // Close the modal
+                    location.reload(); // Reload the page to reflect changes
+                } else {
+                    response.json().then(data => {
+                        alert('Failed to report accident: ' + (data.error || 'Please try again.'));
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the report.');
+            });
+        }
+
+        // Attach event listeners to search and filter inputs
+        document.getElementById('searchInput').addEventListener('input', filterHighways);
+        document.getElementById('statusFilter').addEventListener('change', filterHighways);
+        document.getElementById('tagFilter').addEventListener('change', filterHighways);
+    </script>
+    <script>
+        function filterHighways() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value.toLowerCase();
+            const tagFilter = document.getElementById('tagFilter').value;
+
+            const rows = document.querySelectorAll('#highway-table tbody tr');
+
+            rows.forEach(row => {
+                const highwayName = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                const status = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                // Check if the row matches the search query
+                const matchesSearch = highwayName.includes(searchQuery);
+
+                // Check if the row matches the status filter
+                const matchesStatus = statusFilter === '' || status.includes(statusFilter);
+
+                // Check if the row matches the tag filter
+                let matchesTag = true;
+                if (tagFilter === 'has_tolls') {
+                    matchesTag = row.querySelector('td:nth-child(3)').textContent.trim() !== '';
+                } else if (tagFilter === 'has_rest_areas') {
+                    matchesTag = row.querySelector('td:nth-child(4)').textContent.trim() !== '';
+                } else if (tagFilter === 'has_emergency_contacts') {
+                    matchesTag = row.querySelector('td:nth-child(5)').textContent.trim() !== '';
+                }
+
+                // Show or hide the row based on filters
+                if (matchesSearch && matchesStatus && matchesTag) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Attach event listeners to search and filter inputs
+        document.getElementById('searchInput').addEventListener('input', filterHighways);
+        document.getElementById('statusFilter').addEventListener('change', filterHighways);
+        document.getElementById('tagFilter').addEventListener('change', filterHighways);
+
+        // Function to clear all filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('tagFilter').value = '';
+            filterHighways();
+        }
+    </script>
+    <script>
+        const stripe = Stripe('
+pk_test_51QiYbvBXMMkPWU9DyR5zfOeJ1W83GBInB05JRheYinz842Bz95ZpyVExHKkLrtkUMqKKp38JD2d4wz5tZoPEHFtH00tL7ptyMo');
+const elements = stripe.elements();
+const cardElement = elements.create('card');
+cardElement.mount('#card-element');
+
+const form = document.getElementById('payment-form');
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const { paymentIntent, error } = await stripe.confirmCardPayment(
+        '{{ client_secret }}', {
+            payment_method: {
+                card: cardElement,
+            }
+        }
+    );
+
+    if (error) {
+        document.getElementById('card-errors').textContent = error.message;
+    } else {
+        alert('Payment succeeded!');
+        $('#paymentModal').modal('hide');
+    }
+});
+    </script>
+    <script>
+        const stripe = Stripe('pk_test_51QiYbvBXMMkPWU9DyR5zfOeJ1W83GBInB05JRheYinz842Bz95ZpyVExHKkLrtkUMqKKp38JD2d4wz5tZoPEHFtH00tL7ptyMo'); // Dynamically insert the key from Django
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- Core JS Files -->
+    <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+
+    <!-- Datatables -->
+    <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+</body>
+
+</html>

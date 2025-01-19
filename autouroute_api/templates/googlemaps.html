@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with Search and Highway Routes</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+         #search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #search-container input {
+            width: 300px;
+            padding: 8px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+          #search-container a {
+             margin-right: 10px;
+              text-decoration: none;
+        }
+
+
+        #map {
+            flex-grow: 1;
+            height: calc(100vh - 50px); /* Adjust based on the search container height */
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <a href="/dashboard/">Back to Dashboard</a>
+        <input type="text" id="search-input" placeholder="Enter city name (e.g., Tunis)">
+        <button id="search-button">Search</button>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([36.7152, 10.2372], 13); // Mourouj 3 as the initial center
+        const defaultLocation = [36.7152, 10.2372]; // Mourouj 3, Ben Arous, Tunisia
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Custom icon for the user's location
+        const userIcon = L.icon({
+            iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [0, -41],
+        });
+
+        let userMarker = null; // Marker for the user's location
+        let routeLayer = null; // Layer to display the highway route
+
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        map.setView([userLocation.lat, userLocation.lng], 13);
+
+                        if (userMarker) {
+                            userMarker.setLatLng([userLocation.lat, userLocation.lng]);
+                        } else {
+                            userMarker = L.marker([userLocation.lat, userLocation.lng], { icon: userIcon })
+                                .addTo(map)
+                                .bindPopup('Your Location')
+                                .openPopup();
+                        }
+                    },
+                    () => {
+                        map.setView(defaultLocation, 13); // Default to Mourouj 3
+                        if (!userMarker) {
+                            userMarker = L.marker(defaultLocation, { icon: userIcon })
+                                .addTo(map)
+                                .bindPopup('Default Location: Mourouj 3')
+                                .openPopup();
+                        }
+                    }
+                );
+            }
+        }
+
+        // Call the function to locate the user
+        locateUser();
+
+        // Function to search for a city and display a route
+        function searchCity() {
+            const cityName = document.getElementById('search-input').value;
+            if (!cityName) {
+                alert('Please enter a city name.');
+                return;
+            }
+
+            // Use a geocoding API to get the city coordinates
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${cityName}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.length === 0) {
+                        alert('City not found. Please try again.');
+                        return;
+                    }
+
+                    const cityLocation = {
+                        lat: parseFloat(data[0].lat),
+                        lng: parseFloat(data[0].lon),
+                    };
+
+                    // Center the map on the searched city
+                    map.setView([cityLocation.lat, cityLocation.lng], 10);
+
+                    // Draw a route from the default location to the city
+                    if (routeLayer) {
+                        map.removeLayer(routeLayer);
+                    }
+
+                    routeLayer = L.polyline([defaultLocation, [cityLocation.lat, cityLocation.lng]], {
+                        color: 'blue',
+                        weight: 5,
+                        opacity: 0.7,
+                    }).addTo(map);
+
+                    // Add a marker for the city
+                    L.marker([cityLocation.lat, cityLocation.lng])
+                        .addTo(map)
+                        .bindPopup(`Route to ${cityName}`)
+                        .openPopup();
+                })
+                .catch((error) => {
+                    console.error('Error fetching city data:', error);
+                    alert('An error occurred while fetching the city location.');
+                });
+        }
+
+        // Add event listener to the search button
+        document.getElementById('search-button').addEventListener('click', searchCity);
+    </script>
+</body>
+</html>
