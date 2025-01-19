@@ -71,20 +71,18 @@
               
           </div>
       
-          <!-- Username input -->
           <div data-mdb-input-init class="form-outline mb-4">
               <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Enter your username" required />
               <label class="form-label" for="form3Example3">Username</label>
           </div>
-      
-          <!-- Password input -->
+
           <div data-mdb-input-init class="form-outline mb-3">
               <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Enter password" required />
               <label class="form-label" for="form3Example4">Password</label>
           </div>
       
           <div class="d-flex justify-content-between align-items-center">
-              <!-- Checkbox -->
+     
               <div class="form-check mb-0">
                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
                 <label class="form-check-label" for="form2Example3">
@@ -105,7 +103,6 @@
 
 </section>
 
-<!-- MDB UI Kit -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
 <script>
     const loginForm = document.getElementById('loginForm');
@@ -139,10 +136,10 @@
                   }
               })
             .then(data => {
-               if (data && data.token){ //check if the response is valid, and it contains token
-                    localStorage.setItem('access_token', data.token.access); // Correctly set to the local storage, access the access key in the data.token
+               if (data && data.token){ 
+                    localStorage.setItem('access_token', data.token.access); 
                     alert("Logged in successfully")
-                    window.location.href = "/dashboard/"; // Redirect on login
+                    window.location.href = "/dashboard/";
                }
            })
             .catch(error => {

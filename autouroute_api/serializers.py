@@ -20,10 +20,10 @@ class HighwayStatusSerializer(serializers.ModelSerializer):
 class HighwaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Highway
-        fields = ['id', 'name', 'description']  # Include only necessary fields
+        fields = ['id', 'name', 'description']  
 
 class TollSerializer(serializers.ModelSerializer):
-    highway = HighwaySerializer(read_only=True)  # Include highway details
+    highway = HighwaySerializer(read_only=True) 
 
     class Meta:
         model = Toll

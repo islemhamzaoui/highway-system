@@ -39,7 +39,7 @@
 
         #map {
             flex-grow: 1;
-            height: calc(100vh - 50px); /* Adjust based on the search container height */
+            height: calc(100vh - 50px); 
         }
     </style>
 </head>
@@ -53,17 +53,16 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Initialize the map
-        const map = L.map('map').setView([36.7152, 10.2372], 13); // Mourouj 3 as the initial center
-        const defaultLocation = [36.7152, 10.2372]; // Mourouj 3, Ben Arous, Tunisia
-
-        // Add OpenStreetMap tiles
+      
+        const map = L.map('map').setView([36.7152, 10.2372], 13); 
+        const defaultLocation = [36.7152, 10.2372]; 
+       
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Custom icon for the user's location
+        
         const userIcon = L.icon({
             iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
             iconSize: [25, 41],
@@ -71,9 +70,8 @@
             popupAnchor: [0, -41],
         });
 
-        let userMarker = null; // Marker for the user's location
-        let routeLayer = null; // Layer to display the highway route
-
+        let userMarker = null; 
+        let routeLayer = null;
         function locateUser() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -94,7 +92,7 @@
                         }
                     },
                     () => {
-                        map.setView(defaultLocation, 13); // Default to Mourouj 3
+                        map.setView(defaultLocation, 13); 
                         if (!userMarker) {
                             userMarker = L.marker(defaultLocation, { icon: userIcon })
                                 .addTo(map)
@@ -106,10 +104,10 @@
             }
         }
 
-        // Call the function to locate the user
+        
         locateUser();
 
-        // Function to search for a city and display a route
+        
         function searchCity() {
             const cityName = document.getElementById('search-input').value;
             if (!cityName) {
@@ -117,7 +115,7 @@
                 return;
             }
 
-            // Use a geocoding API to get the city coordinates
+            
             fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${cityName}`)
                 .then((response) => response.json())
                 .then((data) => {
@@ -131,10 +129,10 @@
                         lng: parseFloat(data[0].lon),
                     };
 
-                    // Center the map on the searched city
+                   
                     map.setView([cityLocation.lat, cityLocation.lng], 10);
 
-                    // Draw a route from the default location to the city
+                    
                     if (routeLayer) {
                         map.removeLayer(routeLayer);
                     }
@@ -145,7 +143,7 @@
                         opacity: 0.7,
                     }).addTo(map);
 
-                    // Add a marker for the city
+                    
                     L.marker([cityLocation.lat, cityLocation.lng])
                         .addTo(map)
                         .bindPopup(`Route to ${cityName}`)
@@ -157,7 +155,7 @@
                 });
         }
 
-        // Add event listener to the search button
+        
         document.getElementById('search-button').addEventListener('click', searchCity);
     </script>
 </body>

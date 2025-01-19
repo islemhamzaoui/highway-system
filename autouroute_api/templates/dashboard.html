@@ -7,12 +7,8 @@
     <title>Highway Management System</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon" />
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css"
         integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb7g5/5hb7g5/5hb7g5/5hb7g5/5hb7g5/5hb7g5" crossorigin="anonymous">
-
-    <!-- Fonts and icons -->
     <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
     <script>
         WebFont.load({
@@ -33,22 +29,16 @@
             },
         });
     </script>
-
-    <!-- CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
 </head>
 
 <body>
     <div class="wrapper">
-        <!-- Sidebar -->
         <div class="sidebar" data-background-color="dark">
             <div class="sidebar-logo">
-                <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
                     <a href="{% url 'dashboard_view' %}" class="logo">
                     </a>
@@ -64,7 +54,6 @@
                         <i class="gg-more-vertical-alt"></i>
                     </button>
                 </div>
-                <!-- End Logo Header -->
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
@@ -105,12 +94,10 @@
                 </div>
             </div>
         </div>
-        <!-- End Sidebar -->
 
         <div class="main-panel">
             <div class="main-header">
                 <div class="main-header-logo">
-                    <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
                         <a href="{% url 'dashboard_view' %}" class="logo">
                             <img src="{% static 'assets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand"
@@ -128,9 +115,7 @@
                             <i class="gg-more-vertical-alt"></i>
                         </button>
                     </div>
-                    <!-- End Logo Header -->
                 </div>
-                <!-- Navbar Header -->
                 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -225,7 +210,6 @@
                         </ul>
                     </div>
                 </nav>
-                <!-- End Navbar -->
             </div>
             <div id="popup">
                 <p id="popupMessage"></p>
@@ -237,61 +221,46 @@
                         data-bs-target="#reportAccidentModal">
                         Report Accident
                     </button>
-
-                    <!-- Accident Table -->
-<div class="card-body p-0">
-    <div class="table-responsive">
-        <table class="table align-items-center mb-0">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Highway</th>
-                    <th scope="col">Accident Type</th>
-                    <th scope="col">Severity</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Reported By</th>
-                    <th scope="col">Reported At</th>
-                    <th scope="col">Emergency Contact Called</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody id="accident-table-body">
-                {% for accident in accidents %}
-                    <tr>
-                        <!-- Highway -->
-                        <td>{{ accident.highway.name|default:"N/A" }}</td>
-            
-                        <!-- Accident Type -->
-                        <td>{{ accident.get_accident_type_display|default:"N/A" }}</td>
-            
-                        <!-- Severity -->
-                        <td>{{ accident.get_severity_display|default:"N/A" }}</td>
-            
-                        <!-- Description -->
-                        <td>{{ accident.description|default:"N/A" }}</td>
-            
-                        <!-- Reported By -->
-                        <td>
-                            {% if accident.reported_by %}
+               <div class="card-body p-0">
+                    <div class="table-responsive">
+                       <table class="table align-items-center mb-0">
+                       <thead class="thead-light">
+                        <tr>
+                           <th scope="col">Highway</th>
+                           <th scope="col">Accident Type</th>
+                           <th scope="col">Severity</th>
+                           <th scope="col">Description</th>
+                           <th scope="col">Reported By</th>
+                           <th scope="col">Reported At</th>
+                           <th scope="col">Emergency Contact Called</th>
+                           <th scope="col">Status</th>
+                        </tr>
+                       </thead>
+                       <tbody id="accident-table-body">
+                        {% for accident in accidents %}
+                        <tr>
+                          <td>{{ accident.highway.name|default:"N/A" }}</td>
+                          <td>{{ accident.get_accident_type_display|default:"N/A" }}</td>
+                          <td>{{ accident.get_severity_display|default:"N/A" }}</td>
+                          <td>{{ accident.description|default:"N/A" }}</td>
+                          <td>
+                             {% if accident.reported_by %}
                                 {{ accident.reported_by.get_full_name|default:accident.reported_by.username }}
-                            {% else %}
+                             {% else %}
                                 N/A
-                            {% endif %}
-                        </td>
+                             {% endif %}
+                          </td>
+                          <td>
+                             {{ accident.reported_at|default:"N/A" }}</td>
             
-                        <!-- Reported At -->
-                        <td>{{ accident.reported_at|default:"N/A" }}</td>
-            
-                        <!-- Emergency Contact Called -->
-                        <td>
-                            {% if accident.emergency_contact_called %}
-                                <span class="badge bg-success">Yes</span>
-                            {% else %}
+                          <td>
+                             {% if accident.emergency_contact_called %}
+                              <span class="badge bg-success">Yes</span>
+                             {% else %}
                                 <span class="badge bg-danger">No</span>
-                            {% endif %}
-                        </td>
-            
-                        <!-- Status -->
-                        <td>
+                             {% endif %}
+                          </td>
+                          <td>
                             <span class="badge 
                                 {% if accident.status == 'reported' %}bg-warning
                                 {% elif accident.status == 'under_investigation' %}bg-info
@@ -300,19 +269,17 @@
                                 {% endif %}">
                                 {{ accident.get_status_display|default:"N/A" }}
                             </span>
-                        </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="8" class="text-center">No accidents found.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-                    <!-- Report Accident Modal -->
+                          </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                          <td colspan="8" class="text-center">No accidents found.</td>
+                        </tr>
+                        {% endfor %}
+                       </tbody>
+                      </table>
+                </div>
+            </div>
                     <div class="modal fade" id="reportAccidentModal" tabindex="-1"
                         aria-labelledby="reportAccidentModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -325,7 +292,6 @@
                                 <div class="modal-body">
                                     <form id="accident-form">
                                         {% csrf_token %} 
-                                        <!-- Highway Selection -->
                                         <div class="mb-3">
                                             <label for="highway" class="form-label">Highway</label>
                                             <select class="form-control" id="highway" name="highway" required>
@@ -335,8 +301,6 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
-
-                                        <!-- Accident Type -->
                                         <div class="mb-3">
                                             <label for="accident_type" class="form-label">Accident Type</label>
                                             <select class="form-control" id="accident_type" name="accident_type" required>
@@ -347,8 +311,6 @@
                                                 <option value="other">Other</option>
                                             </select>
                                         </div>
-
-                                        <!-- Severity -->
                                         <div class="mb-3">
                                             <label for="severity" class="form-label">Severity</label>
                                             <select class="form-control" id="severity" name="severity" required>
@@ -358,14 +320,10 @@
                                                 <option value="fatal">Fatal</option>
                                             </select>
                                         </div>
-
-                                        <!-- Description -->
                                         <div class="mb-3">
                                             <label for="description" class="form-label">Description</label>
                                             <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                                         </div>
-
-                                        <!-- Emergency Contact Called -->
                                         <div class="mb-3 form-check">
                                             <input type="checkbox" class="form-check-input" id="emergency_contact_called" name="emergency_contact_called">
                                             <label class="form-check-label" for="emergency_contact_called">Emergency Contact Called</label>
@@ -381,18 +339,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Highway Status Information -->
                     <h1>Highway Status Information</h1>
-
-                    <!-- Search and Filters Section -->
                     <div class="row mb-4">
-                        <!-- Search Bar -->
                         <div class="col-md-6">
                             <input type="text" id="searchInput" class="form-control" placeholder="Search highways by name..." />
                         </div>
-
-                        <!-- Filters -->
                         <div class="col-md-3">
                             <select id="statusFilter" class="form-control">
                                 <option value="">Filter by Status</option>
@@ -401,8 +352,6 @@
                                 <option value="closed">Closed</option>
                             </select>
                         </div>
-
-                        <!-- Tags -->
                         <div class="col-md-3">
                             <select id="tagFilter" class="form-control">
                                 <option value="">Filter by Tags</option>
@@ -412,8 +361,6 @@
                             </select>
                         </div>
                     </div>
-
-                    <!-- Display Highways -->
                     <table class="table table-bordered" id="highway-table">
                         <thead>
                             <tr>
@@ -440,8 +387,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Tolls Modal for Each Highway -->
     {% for highway in highways %}
     <div class="modal fade" id="tollsModal{{ highway.id }}" tabindex="-1" aria-labelledby="tollsModalLabel{{ highway.id }}" aria-hidden="true">
         <div class="modal-dialog">
@@ -490,8 +435,6 @@
     </div>
     {% endfor %}
 </div>
-
-<!-- JavaScript for Stripe Payment -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     function openPaymentModal(tollId, amount) {
@@ -502,44 +445,37 @@
                 'X-CSRFToken': '{{ csrf_token }}',
             },
             body: JSON.stringify({
-                amount: amount * 100,  // Convert to cents
+                amount: amount * 100,  
                 currency: 'usd',
             }),
         })
         .then(response => response.json())
         .then(data => {
             const sessionId = data.sessionId;
-            // Redirect to Stripe Checkout
             const stripe = Stripe('pk_test_51QiYbvBXMMkPWU9DyR5zfOeJ1W83GBInB05JRheYinz842Bz95ZpyVExHKkLrtkUMqKKp38JD2d4wz5tZoPEHFtH00tL7ptyMo');
             stripe.redirectToCheckout({ sessionId: sessionId });
         });
     }
 </script>
-
-
-    <!-- JavaScript for Form Submission and Filtering -->
     <script>
-        // Function to handle accident report submission
         function reportAccident() {
             const formData = new FormData(document.getElementById('accident-form'));
-        
-            // Log form data for debugging
             for (let [key, value] of formData.entries()) {
                 console.log(key, value);
             }
         
-            fetch('/api/accidents/', {  // Ensure this matches your Django URL pattern
+            fetch('/api/accidents/', { 
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                    'X-CSRFToken': '{{ csrf_token }}', 
                 },
             })
             .then(response => {
                 if (response.ok) {
                     alert('Accident reported successfully!');
-                    $('#reportAccidentModal').modal('hide'); // Close the modal
-                    location.reload(); // Reload the page to reflect changes
+                    $('#reportAccidentModal').modal('hide'); 
+                    location.reload(); 
                 } else {
                     response.json().then(data => {
                         alert('Failed to report accident: ' + (data.error || 'Please try again.'));
@@ -551,8 +487,6 @@
                 alert('An error occurred while submitting the report.');
             });
         }
-
-        // Attach event listeners to search and filter inputs
         document.getElementById('searchInput').addEventListener('input', filterHighways);
         document.getElementById('statusFilter').addEventListener('change', filterHighways);
         document.getElementById('tagFilter').addEventListener('change', filterHighways);
@@ -568,14 +502,8 @@
             rows.forEach(row => {
                 const highwayName = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
                 const status = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-
-                // Check if the row matches the search query
                 const matchesSearch = highwayName.includes(searchQuery);
-
-                // Check if the row matches the status filter
                 const matchesStatus = statusFilter === '' || status.includes(statusFilter);
-
-                // Check if the row matches the tag filter
                 let matchesTag = true;
                 if (tagFilter === 'has_tolls') {
                     matchesTag = row.querySelector('td:nth-child(3)').textContent.trim() !== '';
@@ -584,8 +512,6 @@
                 } else if (tagFilter === 'has_emergency_contacts') {
                     matchesTag = row.querySelector('td:nth-child(5)').textContent.trim() !== '';
                 }
-
-                // Show or hide the row based on filters
                 if (matchesSearch && matchesStatus && matchesTag) {
                     row.style.display = '';
                 } else {
@@ -593,13 +519,9 @@
                 }
             });
         }
-
-        // Attach event listeners to search and filter inputs
         document.getElementById('searchInput').addEventListener('input', filterHighways);
         document.getElementById('statusFilter').addEventListener('change', filterHighways);
         document.getElementById('tagFilter').addEventListener('change', filterHighways);
-
-        // Function to clear all filters
         function clearFilters() {
             document.getElementById('searchInput').value = '';
             document.getElementById('statusFilter').value = '';
@@ -639,24 +561,17 @@ form.addEventListener('submit', async (event) => {
     </script>
     <script src="https://js.stripe.com/v3/"></script>
 
-    <!-- Core JS Files -->
     <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
     <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-    <!-- jQuery Scrollbar -->
     <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-    <!-- Chart Circle -->
     <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
 
-    <!-- Datatables -->
     <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
-
-    <!-- Bootstrap Notify -->
     <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
 
-    <!-- jQuery Vector Maps -->
     <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
     <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
 </body>

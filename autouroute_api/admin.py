@@ -29,8 +29,7 @@ class TollAdmin(admin.ModelAdmin):
     list_display = ('highway', 'location', 'vehicle_category', 'rate', 'paid', 'payment_id', 'created_at', 'user')
     list_filter = ('vehicle_category', 'paid')
     search_fields = ('highway__name', 'location', 'payment_id')
-    readonly_fields = ('created_at',)  # Make created_at read-only
-
+    readonly_fields = ('created_at',)  
 
 
 @admin.register(RestArea)

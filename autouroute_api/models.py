@@ -6,8 +6,7 @@ from django.db import models
 class Highway(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
-    coordinates = models.JSONField(blank=True, null=True)  # Store coordinates as JSON
-
+    coordinates = models.JSONField(blank=True, null=True)  
     def __str__(self):
         return self.name
     
@@ -90,7 +89,7 @@ class Toll(models.Model):
     paid = models.BooleanField(default=False)
     payment_id = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  # Track user
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  
 
     def __str__(self):
         return f"Toll at {self.location} ({self.vehicle_category})"
